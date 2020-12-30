@@ -68,7 +68,10 @@ export class JoditAngularComponent extends Events implements AfterViewInit, OnDe
         const tagName = typeof this.tagName === 'string' ? this.tagName : 'textarea';
         this.element = document.createElement(tagName);
         if (this.element) {
-            this.element.id = this.id;
+            this.element.id = this._config["id"];
+            if (this._config["value"] != undefined){
+                this.element["value"] = this._config["value"];
+            }
             this.elementRef.nativeElement.appendChild(this.element);
         }
     }
