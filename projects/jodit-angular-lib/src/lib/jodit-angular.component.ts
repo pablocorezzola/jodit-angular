@@ -52,7 +52,7 @@ export class JoditAngularComponent extends Events implements AfterViewInit, OnDe
     @Input() id: string | undefined;
     @Input() defaultValue: string | undefined;
 
-    element: HTMLElement;
+    element: HTMLInputElement;
     editor: any;
 
     private onChangeCallback: (_: any) => {};
@@ -66,12 +66,10 @@ export class JoditAngularComponent extends Events implements AfterViewInit, OnDe
 
     createElement() {
         const tagName = typeof this.tagName === 'string' ? this.tagName : 'textarea';
-        this.element = document.createElement(tagName);
+        this.element = <HTMLInputElement>document.createElement(tagName);
         if (this.element) {
-            this.element.id = this._config["id"];
-            if (this._config["value"] != undefined){
-                this.element["value"] = this._config["value"];
-            }
+            this.element.id = this.id; 
+            this.element["value"] = this.defaultValue;
             this.elementRef.nativeElement.appendChild(this.element);
         }
     }
